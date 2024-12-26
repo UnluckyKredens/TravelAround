@@ -2,6 +2,9 @@
 
 TravelAround to aplikacja napisana w **Swift**, która umożliwia użytkownikom wyszukiwanie najlepszych atrakcji turystycznych i planów podróży przy użyciu **ChatGPT**. Dzięki integracji z API OpenAI, aplikacja generuje spersonalizowane rekomendacje na podstawie podanych przez użytkownika parametrów, takich jak lokalizacja początkowa, miejsce docelowe i budżet.
 
+![image](https://github.com/user-attachments/assets/d02db65d-5fba-497f-89cd-aa1c98520937)
+
+
 ---
 
 ## 📱 Funkcjonalności
