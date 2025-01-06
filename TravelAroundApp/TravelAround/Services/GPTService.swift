@@ -10,9 +10,9 @@ import Foundation
 class ChatGPTService: ObservableObject {
     @Published var responseText: String = ""
     
-    private let apiKey = "KEY_TO_OPENAI_API"
+    private let apiKey = "YOUR_OPENAI_API_KEY"
     
-    func fetchBestTravelOption(from: String, to: String, budget: String) {
+    func fetchBestTravelOption(from: String, to: String, budget: String, days: String, members: String) {
         guard let url = URL(string: "https://api.openai.com/v1/chat/completions") else {
             responseText = "Invalid URL."
             return
@@ -27,7 +27,7 @@ class ChatGPTService: ObservableObject {
             "model": "gpt-3.5-turbo",
             "messages": [
                 ["role": "system", "content": "Jesteś asystentem podróży, twoim zadaniem jest znalezienie dostępnych atrakcji w \(to), i wyliczenie wszystkich kosztów podróży.Zmieść się w 1000 słów i postaraj się dać najwięcej atrakcji. Nie pisz zakończenia i rozpoczęcia wiadomości, tylko sam opis"],
-                ["role": "user", "content": "Znajdź najlepszy plan podróży z \(from) do \(to) z maksymalnym budżetem \(budget) zł. Podaj nazwy atrakcji i koszt podróży w tabeli."]
+                ["role": "user", "content": "Chcę zaplanować wyjazd z miasta \(from)do miasta \(to) z budżetem \(budget) na \(days) dni, dla \(members) osob. Proszę o szczegółowy plan, który zawiera: 1.Opcje transportu z uwzględnieniem kosztów i czasu podróży. 2. Propozycje hoteli w mieście docelowym. 3.Listę atrakcji turystycznych w mieście docelowym z krótkim opisem.3,Podsumowanie całkowitego kosztu (transport, zakwaterowanie, atrakcje) wraz z uwzględnieniem budżetu. Proszę o wskazanie alternatyw, jeśli coś nie zmieści się w budżecie. Niech wszystkie koszty będą precyzyjnie sprawdzone"]
             ],
             "max_tokens": 1000
         ]

@@ -8,81 +8,105 @@
 import SwiftUI
 
 struct ReadyTravelsBox: View {
-    var readyTravels: [ReadyTravelModel] = [
-        ReadyTravelModel(id: 0, imageUrl: "https://cdn.britannica.com/14/94514-050-461B9A6D/Palm-trees-ocean-Bahamas-New-Providence-Island.jpg", name: "Tropical Paradise", description: "A tropical escape", date: "2024-12-12", price: 150),
-        ReadyTravelModel(id: 1, imageUrl: "https://cdn.britannica.com/14/94514-050-461B9A6D/Palm-trees-ocean-Bahamas-New-Providence-Island.jpg", name: "Island Adventure", description: "Explore the wild", date: "2024-12-15", price: 250),
-    ]
     
+    @State private var readyTravels: [ReadyTravelModel] = []
     @State private var selectedTravel: ReadyTravelModel? = nil
-
+    @State private var apiIsLoaded: Bool = false
+    @State private var liked: Bool = false
+    @State private var errorMessage: String?
     
+    private let apiService = ReadyTravelService()
     var body: some View {
-        
-        ScrollView(.horizontal) {
-            LazyHStack(alignment: .top, spacing: 16) {
-                ForEach(self.readyTravels) { travel in
-                    Button(action: {
-                        selectedTravel = travel // Set selectedTravel to trigger fullScreenCover
-                    }) {
-                        VStack(alignment: .leading, spacing: 0) {
-                            AsyncImage(url: URL(string: travel.imageUrl)) { image in
-                                image.image?.resizable()
+        Text("Gotowe propozycje")
+            .frame(maxWidth: .infinity, alignment: .center)
+            .padding(.top, 10)
+            .font(.headline)
+        Group {
+            if let errorMessage = errorMessage {
+                Text(errorMessage).foregroundStyle(.red)
+            }else {
+                ScrollView(.horizontal) {
+                    LazyHStack(alignment: .top, spacing: 16) {
+                        ForEach(self.readyTravels) { travel in
+                            Button(action: {
+                                selectedTravel = travel
+                            }) {
+                                VStack(alignment: .leading, spacing: 0) {
+                                    AsyncImage(url: URL(string: travel.imageUrl)) { image in
+                                        image.image?.resizable()
+                                    }
+                                    .frame(height: 90)
+                                    HStack {
+                                        Text(travel.name)
+                                        Spacer()
+                                        Text("$ " + String(travel.price))
+                                    }
+                                    .frame(height: 65)
+                                    .padding([.leading, .trailing], 8)
+                                    
+                                    .fontWidth(.condensed)
+                                }
+                                .frame(width: 150, height: 150, alignment: .top)
+                                .background(Color.white)
+                                .cornerRadius(12)
+                                .shadow(radius: 4)
                             }
-                            .frame(height: 90)
+                        }
+                    }
+                    .padding(.horizontal, 16)
+                }.onAppear{loadAPI()}
+                    .frame(height: 155)
+                    .fullScreenCover(item: $selectedTravel) {travel in
+                        VStack {
                             HStack {
-                                Text(travel.name)
+                                Button(action: {
+                                    selectedTravel = nil
+                                }) {
+                                    Image(systemName: "arrow.left")
+                                        .frame(alignment:.leading)
+                                        .foregroundStyle(Color.gray)
+                                        .font(.title)
+                                        .padding([.leading, .bottom], 10.0)
+                                }
                                 Spacer()
-                                Text("$ " + String(travel.price))
-                            }
-                            .frame(height: 65)
-                            .padding([.leading, .trailing], 8)
-                            
-                            .fontWidth(.condensed)
+                                
+                                Spacer()
+                                if(liked) {
+                                    Image(systemName: "heart.fill")
+                                        .foregroundStyle(Color.red)
+                                        .modifier(ActionImageModifier())
+                                        .onTapGesture {liked = false}
+                                }else {
+                                    Image(systemName: "heart")
+                                        .modifier(ActionImageModifier())
+                                        .onTapGesture {liked = true}
+                                }
+                            }.padding()
+                            Divider()
                         }
-                        .frame(width: 150, height: 150, alignment: .top)
-                        .background(Color.white)
-                        .cornerRadius(12)
-                        .shadow(radius: 4)
+                        
+                        ReadyTravelsView(travel: travel).padding(0)
                     }
-                }
-            }
-            .padding(.horizontal, 16)
-        }
-        .frame(height: 155)
-        .fullScreenCover(item: $selectedTravel) { travel in
-            VStack(alignment: .leading, spacing: 0) {
-                VStack( spacing: 0) {
-                    HStack {
-                            Image(systemName: "arrow.left")
-                            .onTapGesture(perform: {selectedTravel = nil})
-                            .modifier(ActionImageModifier())
-                            .frame(alignment: .leading)
-                        Spacer()
-                            Image(systemName: "plus")
-                            .modifier(ActionImageModifier())
-                            .frame(alignment: .trailing)
-                        }
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-                
-                
-            ReadyTravelsView(travel: travel).padding(0)
             }
         }
     }
-
-struct ActionImageModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-//            .frame(maxWidth: .infinity)
-            .foregroundColor(.gray)
-            .font(.title)
-            .padding([.leading, .trailing], 15.0)
-            .padding([.bottom], 10.0)
+    
+    private func loadAPI() {
+        Task {
+            do {
+                readyTravels = try await apiService.GetAllTravels()
+            }
+            catch {
+                errorMessage = "Nie udało się pobrać danych: \(error.localizedDescription)"
+                print(error.localizedDescription)
+            }
+        }
     }
 }
+
+
+
+
 
 #Preview {
     ReadyTravelsBox()

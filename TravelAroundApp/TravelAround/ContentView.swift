@@ -9,23 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
    
-
-
-    
     var body: some View {
         ScrollView() {
                 TopBarView()
-            
-            Text("Best ready propositions")
-                .frame(maxWidth: .infinity, alignment: .center)
-                .padding(.top, 10)
-                .font(.headline)
-            
+                        
             ReadyTravelsBox().padding()
             Spacer()
             GenerateTravelBox().padding()
             
-        }.frame(height: .infinity, alignment: .top)
+            
+        }
     }
 }
 

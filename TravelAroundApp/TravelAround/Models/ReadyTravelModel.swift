@@ -7,20 +7,18 @@
 
 import Foundation
 
-class ReadyTravelModel: Identifiable {
-    let id: Int
+class ReadyTravelModel: Identifiable, Codable {
+    let travelId: Int
     var imageUrl: String
     var name: String
     var description: String
-    var date: String
     var price: Double
     
-    init(id: Int, imageUrl: String, name: String, description: String, date: String,  price: Double) {
-        self.id = id
+    init(travelId: Int, imageUrl: String, name: String, description: String, price: Double) {
+        self.travelId = travelId
         self.imageUrl = imageUrl
         self.name = name
         self.description = description
-        self.date = date
         self.price = price
     }
 }
