@@ -42,7 +42,7 @@ struct ContentView: View {
                 Text("Najpopularniejsze Wycieczki").font(.system(size: 22, weight: .thin))
                 ReadyTravelsList()
                 Text("Moje Wycieczki").font(.system(size: 22, weight: .thin))
-                MyTravelsList()
+//                MyTravelsList()
             }
             .padding()
             Spacer()

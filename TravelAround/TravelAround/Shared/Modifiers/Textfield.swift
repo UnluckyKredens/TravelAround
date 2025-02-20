@@ -13,9 +13,9 @@ struct standardFieldModifier: ViewModifier {
             .frame(width: 350, height: 50)
             .overlay(RoundedRectangle(cornerRadius: 15).stroke(Color.gray1, lineWidth: 1))
                 .shadow(color: .gray, radius: 10, x: 10, y: 10)
+                .textInputAutocapitalization(.never)
     }
 }
-
 extension View {
     func standardField() -> some View {
         modifier(standardFieldModifier())
@@ -30,10 +30,11 @@ struct PasswordField: View {
     var body: some View {
         HStack {
             if isSecured {
-                SecureField(text, text: $password)
+                SecureField(text, text: $password).textInputAutocapitalization(.never)
 
             }else {
-                TextField(text, text: $password)
+                TextField(text, text: $password).textInputAutocapitalization(.never)
+
             }
             Button(action: {
                 self.isSecured.toggle()

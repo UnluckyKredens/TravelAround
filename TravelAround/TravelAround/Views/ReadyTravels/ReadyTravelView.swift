@@ -100,5 +100,5 @@ struct Extras: View {
 }
 
 #Preview {
-    ReadyTravelView(travel: ReadyTravelModel(travelId: 1, imageUrl: "", name: "Kraków -> Warszawa", description: "Lorem Impsum", price: 250.99))
+    ReadyTravelView(travel: ReadyTravelModel(travelId: 0, imageUrl: "", name: "", description: "", price: 0, from: "", destination: "", members: 0, likes: 0))
 }

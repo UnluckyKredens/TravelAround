@@ -1,0 +1,51 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Controllers\" />
+    <None Remove="Entities\" />
+    <None Remove="Data\" />
+    <None Remove="DTOs\" />
+    <None Remove="Helpers\" />
+    <None Remove="DTOs\User\" />
+    <None Remove="DTOs\GPT\" />
+    <None Remove="Entities\User\" />
+    <None Remove="Entities\GPT\" />
+    <None Remove="Services\" />
+    <None Remove="Entities\TravelModels\" />
+    <None Remove="DTOs\TravelDTO\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+    <Folder Include="Entities\" />
+    <Folder Include="Data\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="DTOs\User\" />
+    <Folder Include="DTOs\GPT\" />
+    <Folder Include="Entities\User\" />
+    <Folder Include="Entities\GPT\" />
+    <Folder Include="Services\" />
+    <Folder Include="Entities\TravelModels\" />
+    <Folder Include="DTOs\TravelDTO\" />
+  </ItemGroup>
+</Project>
