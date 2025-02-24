@@ -9,11 +9,19 @@ import SwiftUI
 
 struct SearchBar: View {
     @State var search: String = "";
+    @State var fullscreen: Bool = false;
     var body: some View {
         HStack {
-            TextField("Wyszukaj gotową wycieczkę", text: $search )
+            TextField("Gdzie chcesz się wybrać?", text: $search ).onSubmit {
+                fullscreen.toggle()
+            }
             Image(systemName: "magnifyingglass").onTapGesture {
-                print(search)
+                Task {
+                    fullscreen.toggle();
+                }
+            }.fullScreenCover(isPresented: $fullscreen) {
+                SimpleNavbar(fullscreen: $fullscreen)
+                TravelSearchResult(searchedText: search)
             }
         }
         .padding()

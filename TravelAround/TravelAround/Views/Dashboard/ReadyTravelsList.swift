@@ -42,7 +42,6 @@ struct ReadyTravelsList: View {
             self.isLoading = 0
         } catch {
             self.isLoading = -1
-            print(error.localizedDescription)
         }
     }
     

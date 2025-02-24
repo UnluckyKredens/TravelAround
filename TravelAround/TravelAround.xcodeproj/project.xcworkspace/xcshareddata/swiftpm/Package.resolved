@@ -1,0 +1,15 @@
+{
+  "originHash" : "81f038dc67947b53f957f641478d32bc5ef8c7c5d83e7d9579decc1e04637d50",
+  "pins" : [
+    {
+      "identity" : "ttgsnackbar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zekunyan/TTGSnackbar",
+      "state" : {
+        "revision" : "123e3ef9b91252c0aae20b13625b4e2a160c5f4b",
+        "version" : "1.12.0"
+      }
+    }
+  ],
+  "version" : 3
+}

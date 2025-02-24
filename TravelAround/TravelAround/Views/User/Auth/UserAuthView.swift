@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import TTGSnackbar
+
 
 struct UserAuthView: View {
     let descriptions: [String] = [
@@ -96,6 +98,8 @@ struct Login: View {
     func Login() async {
         do {
             _ = try await UserService().LoginUser(user: user)
+            let snackbar = TTGSnackbar(message: "Zalogowano pomyślnie", duration: .middle)
+            snackbar.show()
             dismiss()
         }catch {
             errorMessage = error.localizedDescription
@@ -115,7 +119,7 @@ struct Register: View {
     @State private var password2: String = ""
     @State private var errorMessage: String = ""
     @Environment(\.dismiss) private var dismiss
-
+    
     
     var body: some View {
         VStack {
@@ -148,7 +152,6 @@ struct Register: View {
     
     func RegisterUser() async {
         errorMessage = ""
-        
         if user.password != password2 {
             errorMessage += "Hasła są różne \n"
         }
@@ -162,6 +165,8 @@ struct Register: View {
         if errorMessage.isEmpty {
             do {
                 _ = try await UserService().RegisterUser(user: user)
+                let snackbar = TTGSnackbar(message: "Zarejestrowano pomyślnie", duration: .middle)
+                snackbar.show()
                 dismiss()
             } catch {
                 errorMessage += "\(error)"

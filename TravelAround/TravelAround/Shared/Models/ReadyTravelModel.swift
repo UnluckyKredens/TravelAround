@@ -28,5 +28,6 @@ class ReadyTravelModel: Codable, Identifiable {
         self.destination = destination
         self.members = members
         self.likes = likes
+        
     }
 }

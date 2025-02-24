@@ -37,7 +37,6 @@ struct Card: View {
 
                 VStack {
                     Text(travel.name)
-                        .font(.headline)
                         .foregroundColor(.black)
                     Text("\(String(format: "%.2f", travel.price)) zł")
                         .font(.subheadline)

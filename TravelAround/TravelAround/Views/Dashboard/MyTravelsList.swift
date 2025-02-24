@@ -12,6 +12,7 @@ struct MyTravelsList: View {
     
     @State var selectedTravel: ReadyTravelModel? = nil
     @State var isLoading: Int = 1
+    @State var errorMessage: String = "";
     private var travelService = TravelService()
     
     var body: some View {
@@ -22,28 +23,41 @@ struct MyTravelsList: View {
             else if isLoading == -1 {
                 VStack {
                     Image(systemName: "x.circle").foregroundStyle(.red).font(.system(size: 32)).padding(2)
-                    Text("No internet connection").font(.system(size: 18, weight: .light))
+                    Text("Coś poszło nie tak").font(.system(size: 18, weight: .light))
                 }.frame(height: 180)
             }
             else {
+                if(ReadyTravels.count == 0) {
+                    VStack(alignment: .center) {
+                        Image(systemName: "plus").foregroundStyle(.gray1)
+                            .font(.system(size: 32)).padding(2)
+                        Text("Jeszcze nie masz swoich podróży \nStwórz ją").multilineTextAlignment(.center)
+                            .font(.system(size: 18, weight: .light))
+                    }
+                }else {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack() {
-                        ForEach(ReadyTravels) { travel in
-                            Card(travel: travel, selectedTravel: selectedTravel)
-                        }.frame(height: 230, alignment: .center)
+                            ForEach(ReadyTravels) { travel in
+                                Card(travel: travel, selectedTravel: selectedTravel)
+                            }.frame(height: 230, alignment: .center)
+                        }
+                        
                     }
                 }
             }
         }.task {
+            await DownloadData()
         }
         
     }
     
-    func DownloadData() {
+    func DownloadData() async {
         do {
-            
+            ReadyTravels = try await travelService.DownloadMyTravels()
+            isLoading = 0
         }catch {
-            
+            isLoading = -1
+            errorMessage = error.localizedDescription
         }
     }
 }
@@ -51,5 +65,5 @@ struct MyTravelsList: View {
 
 
 #Preview {
-    MyTravelsList()
+    MyTravelsList().font(.system(size: 18, weight: .thin))
 }

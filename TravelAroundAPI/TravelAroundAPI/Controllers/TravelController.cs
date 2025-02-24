@@ -40,6 +40,7 @@ public class TravelController : ControllerBase
             From = travel.From,
             Members = travel.Members,
             Description = travel.Description,
+            Days = travel.Days,
             madeByUserId = travel.userId
         };
 
@@ -68,6 +69,7 @@ public class TravelController : ControllerBase
             From = t.From,
             Members = t.Members,
             Description = t.Description,
+            Days = t.Days,
             Likes = t.Likes,
             Atractions = t.TravelAtractions
                 .Select(ta => new AtractionDTO
@@ -110,6 +112,7 @@ public class TravelController : ControllerBase
             Members = t.Members,
             Description = t.Description,
             Likes = t.Likes,
+            Days = t.Days,
             Atractions = t.TravelAtractions
                 .Select(ta => new AtractionDTO
                 {
@@ -149,6 +152,7 @@ public class TravelController : ControllerBase
             Members = travel.Members,
             Description = travel.Description,
             Likes = travel.Likes,
+            Days = travel.Days,
             Atractions = travel.TravelAtractions
                 .Select(ta => new AtractionDTO
                 {
@@ -185,6 +189,7 @@ public class TravelController : ControllerBase
             From = t.From,
             Members = t.Members,
             Description = t.Description,
+            Days = t.Days,
             Likes = t.Likes,
             Atractions = t.TravelAtractions
                 .Select(ta => new AtractionDTO
@@ -200,40 +205,7 @@ public class TravelController : ControllerBase
         }).ToList();
 
         return Ok(travelDtos);
-    }
-
-    [HttpGet("favourites/{userId}")]
-    public async Task<ActionResult<IEnumerable<TravelModel>>> GetFavourites(int userId)
-    {
-        var travel = await _context.FavouriteTravels
-            .Where(f => f.UserId == userId)
-            .Select(f => new TravelWithAtractionsDTO
-            {
-                TravelId = f.Travel.Id,
-                ImageUrl = f.Travel.ImageUrl,
-                Price = f.Travel.Price,
-                From = f.Travel.From,
-                Members = f.Travel.Members,
-                Name = f.Travel.Name,
-                Destination = f.Travel.Destination,
-                Description = f.Travel.Description,
-                Atractions = f.Travel.TravelAtractions
-                    .Select(ta => new AtractionDTO
-                    {
-                        Id = ta.Atraction.Id,
-                        Name = ta.Atraction.Name,
-                        Description = ta.Atraction.Description,
-                        Price = ta.Atraction.Price,
-                        Destination = ta.Atraction.Destination,
-
-                    }).ToList()
-            })
-            .ToListAsync();
-
-
-
-        return Ok(travel);
-    }
+    } 
 
     [HttpGet("user/{userId}")]
     public async Task<ActionResult<IEnumerable<TravelModel>>> GetMyTravels(int userId)
@@ -251,6 +223,7 @@ public class TravelController : ControllerBase
                 Name = f.Name,
                 Destination = f.Destination,
                 Description = f.Description,
+                Days = t.Days,
                 Atractions = f.TravelAtractions
                     .Select(ta => new AtractionDTO
                     {

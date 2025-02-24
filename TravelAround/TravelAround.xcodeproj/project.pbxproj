@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AF9E15072D678925008C8AC0 /* TTGSnackbar in Frameworks */ = {isa = PBXBuildFile; productRef = AF9E15062D678925008C8AC0 /* TTGSnackbar */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		AF1F29902D4927C100746D99 /* TravelAround.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelAround.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF9E15072D678925008C8AC0 /* TTGSnackbar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 			);
 			name = TravelAround;
 			packageProductDependencies = (
+				AF9E15062D678925008C8AC0 /* TTGSnackbar */,
 			);
 			productName = TravelAround;
 			productReference = AF1F29902D4927C100746D99 /* TravelAround.app */;
@@ -107,6 +113,9 @@
 			);
 			mainGroup = AF1F29872D4927C100746D99;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AF9E15052D678925008C8AC0 /* XCRemoteSwiftPackageReference "TTGSnackbar" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = AF1F29912D4927C100746D99 /* Products */;
 			projectDirPath = "";
@@ -339,6 +348,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AF9E15052D678925008C8AC0 /* XCRemoteSwiftPackageReference "TTGSnackbar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/zekunyan/TTGSnackbar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AF9E15062D678925008C8AC0 /* TTGSnackbar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF9E15052D678925008C8AC0 /* XCRemoteSwiftPackageReference "TTGSnackbar" */;
+			productName = TTGSnackbar;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AF1F29882D4927C100746D99 /* Project object */;
 }

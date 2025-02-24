@@ -49,9 +49,7 @@ class UserService {
             let body = ["login": user.login, "password": user.password]
             let loginData = try JSONEncoder().encode(body)
             request.httpBody = loginData
-            
-            print(body)
-            
+                        
             let (data, _) = try await URLSession.shared.data(for: request)
             
             guard let res = String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines) else {

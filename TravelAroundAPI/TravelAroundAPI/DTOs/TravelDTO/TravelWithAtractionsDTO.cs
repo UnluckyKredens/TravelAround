@@ -12,6 +12,7 @@ namespace TravelAroundAPI.DTOs.ReturnDTOs
         public string Destination { get; set; }
         public string From { get; set; }
         public double Members { get; set; }
+        public int Days { get; set; }
         public string Description { get; set; }
         public int Likes { get; set; }
 

@@ -26,16 +26,16 @@ class TravelService {
             let travels = try JSONDecoder().decode([ReadyTravelModel].self, from: data)
             return travels
         } catch {
-            print(String(describing: error))
             throw error
         }
     }
     
     func DownloadMyTravels() async throws -> [ReadyTravelModel] {
         do {
-            guard let apiKey = URL(string: "http://127.0.0.1:7173/api/Travel/top") else {
+            guard let apiKey = URL(string: "http://127.0.0.1:7173/api/Travel/user/\(String(UserDefaults.standard.string(forKey: "userId")!))") else {
                 throw URLError(.badURL)
             }
+           
             let (data, res) = try await URLSession.shared.data(from: apiKey)
             
             guard let httpRes = res as? HTTPURLResponse else {
@@ -45,9 +45,31 @@ class TravelService {
                 throw NetworkError.badStatus
             }
             let travels = try JSONDecoder().decode([ReadyTravelModel].self, from: data)
+            
             return travels
         } catch {
-            print(String(describing: error))
+            throw error
+        }
+    }
+    
+    func FindTravelsByDestination(destination: String) async throws -> [ReadyTravelModel] {
+        do {
+            guard let apiKey = URL(string: "http://localhost:7173/api/Travel/destination?destination=\(destination)") else {
+                throw NetworkError.badUrl
+            }
+            
+             let (data, res) = try await URLSession.shared.data(from: apiKey)
+            
+            guard let httpRes = res as? HTTPURLResponse else {
+                throw NetworkError.badResponse
+            }
+            guard (200..<300).contains(httpRes.statusCode) else {
+                throw NetworkError.badStatus
+            }
+            
+            let travels = try JSONDecoder().decode([ReadyTravelModel].self, from: data)
+            return travels
+        }catch {
             throw error
         }
     }
