@@ -2,7 +2,9 @@
 
 TravelAround to aplikacja napisana w **Swift**, która umożliwia użytkownikom wyszukiwanie najlepszych atrakcji turystycznych i planów podróży przy użyciu **ChatGPT**. Dzięki integracji z API OpenAI, aplikacja generuje spersonalizowane rekomendacje na podstawie podanych przez użytkownika parametrów, takich jak lokalizacja początkowa, miejsce docelowe i budżet.
 
-![image](https://github.com/user-attachments/assets/d02db65d-5fba-497f-89cd-aa1c98520937)
+![image](https://github.com/user-attachments/assets/14de9012-2a7f-494d-8a3d-04ba21977379)
+![image](https://github.com/user-attachments/assets/02e3398b-3a25-403e-9ce5-4dbac1d4d443)
+
 
 
 ---
@@ -36,10 +38,12 @@ TravelAround to aplikacja napisana w **Swift**, która umożliwia użytkownikom 
    git clone https://github.com/UnluckyKredens/TravelAround.git
    cd TravelAround
    ```
-2. Otwórz projekt w Xcode
-   - Znajdź plik GPTService.swift
-   - Uzupełnij linijke ```private let apiKey = "KEY_TO_OPENAI_API"``` zastępując swoim kluczem API który dostaniesz ze strony https://platform.openai.com/
-3. Uruchom aplikacje z poziomu Xcode
+2. Otwórz API
+   - Znajdź plik appsettings.json
+   - Uzupełnij swój klucz OpenAI
+   - Stwórz nową baze danych komendą dotnet ef database update
+   - Uruchom API
+3. Uruchom aplikacje w Xcode
 
 ---
 
