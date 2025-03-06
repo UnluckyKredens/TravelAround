@@ -20,12 +20,15 @@ class TravelService {
             guard let httpRes = res as? HTTPURLResponse else {
                 throw URLError(.badServerResponse)
             }
+            print(httpRes)
+
             guard (200..<300).contains(httpRes.statusCode) else {
                 throw NetworkError.badStatus
             }
             let travels = try JSONDecoder().decode([ReadyTravelModel].self, from: data)
             return travels
         } catch {
+            print(error.localizedDescription)
             throw error
         }
     }
@@ -48,6 +51,7 @@ class TravelService {
             
             return travels
         } catch {
+            print(error.localizedDescription)
             throw error
         }
     }
@@ -70,6 +74,7 @@ class TravelService {
             let travels = try JSONDecoder().decode([ReadyTravelModel].self, from: data)
             return travels
         }catch {
+            print(error.localizedDescription)
             throw error
         }
     }

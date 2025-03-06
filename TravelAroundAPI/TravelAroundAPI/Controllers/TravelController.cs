@@ -49,7 +49,7 @@ public class TravelController : ControllerBase
         return Ok();
     }
 
-    
+
 
     [HttpGet]
     public async Task<IActionResult> GetAllTravels()
@@ -205,7 +205,7 @@ public class TravelController : ControllerBase
         }).ToList();
 
         return Ok(travelDtos);
-    } 
+    }
 
     [HttpGet("user/{userId}")]
     public async Task<ActionResult<IEnumerable<TravelModel>>> GetMyTravels(int userId)
@@ -223,7 +223,7 @@ public class TravelController : ControllerBase
                 Name = f.Name,
                 Destination = f.Destination,
                 Description = f.Description,
-                Days = t.Days,
+                Days = f.Days,
                 Atractions = f.TravelAtractions
                     .Select(ta => new AtractionDTO
                     {

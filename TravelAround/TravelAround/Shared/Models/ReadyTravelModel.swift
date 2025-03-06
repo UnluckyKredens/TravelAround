@@ -11,14 +11,15 @@ class ReadyTravelModel: Codable, Identifiable {
     var imageUrl: String
     var name: String
     var description: String
-    var price: Double //POWINNO BYC DOUBLE XDD
+    var price: Float
     var from: String
     var destination: String
-    var members: Double
+    var days: Int
+    var members: Int
     var likes: Int
     var atractions: [AtractionModel]?
     
-    init(travelId: Int, imageUrl: String, name: String, description: String, price: Double, from: String, destination: String, members: Double, likes: Int) {
+    init(travelId: Int, imageUrl: String, days: Int, name: String, description: String, price: Float, from: String, destination: String, members: Int, likes: Int) {
         self.travelId = travelId
         self.imageUrl = imageUrl
         self.name = name
@@ -28,6 +29,6 @@ class ReadyTravelModel: Codable, Identifiable {
         self.destination = destination
         self.members = members
         self.likes = likes
-        
+        self.days = days
     }
 }

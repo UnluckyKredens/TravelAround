@@ -17,7 +17,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<TokenHelper>();
-
+builder.Services.AddHttpClient();
 
 
 var key = Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]);

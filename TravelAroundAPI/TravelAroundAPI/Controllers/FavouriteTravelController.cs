@@ -76,7 +76,7 @@ public class FavouriteTravelController : ControllerBase
                 Name = f.Travel.Name,
                 Destination = f.Travel.Destination,
                 Description = f.Travel.Description,
-                Days = t.Days,
+                Days = f.Travel.Days,
                 Atractions = f.Travel.TravelAtractions
                     .Select(ta => new AtractionDTO
                     {

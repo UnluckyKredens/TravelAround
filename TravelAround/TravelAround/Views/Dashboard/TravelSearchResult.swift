@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TravelSearchResult: View {
     @State var travels: [ReadyTravelModel] = []
-    @State var searchedText: String = "s"
+    @State var searchedText: String = "k"
     @State var selectedTravel: ReadyTravelModel? = nil
     
     var body: some View {
@@ -23,17 +23,17 @@ struct TravelSearchResult: View {
                                 if let image = phase.image {
                                     image
                                         .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 64, height: 100)
+//                                        .scaledToFit()
+                                        .frame(width: 100, height: 80)
                                 } else if phase.error != nil || travel.imageUrl.isEmpty {
                                     Image(systemName: "rectangle.portrait.slash")
                                         .resizable()
                                         .scaledToFit()
-                                        .frame(width: 64, height: 60)
+                                        .frame(width: 100, height: 80)
                                         .foregroundColor(.gray)
                                 } else {
                                     ProgressView()
-                                        .frame(width: 64, height: 60)
+                                        .frame(width: 100, height: 80)
                                 }
                             }
                             VStack {

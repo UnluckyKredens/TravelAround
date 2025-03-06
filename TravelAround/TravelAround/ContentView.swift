@@ -42,8 +42,8 @@ struct ContentView: View {
         
         
         ScrollView {
-            GenerateTravelView()
             SearchBar().padding()
+            GenerateTravelView()
             Text("Najpopularniejsze Wycieczki").font(.system(size: 22, weight: .thin))
             ReadyTravelsList().id(refreshTrigger)
             Text("Moje Wycieczki").font(.system(size: 22, weight: .thin))

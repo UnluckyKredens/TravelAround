@@ -8,7 +8,7 @@
 class AtractionModel: Codable, Identifiable {
     var id: Int
     var name: String
-    var price: Double //Powinno byc double XD
+    var price: Float //Powinno byc Float XD
     var description: String
     var imageUrl: String?
     var destination: String

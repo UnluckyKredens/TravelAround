@@ -10,7 +10,7 @@ import SwiftUI
 struct ReadyTravelView: View {
     var travel: ReadyTravelModel? = nil
     var body: some View {
-        VStack {
+        ScrollView {
             AsyncImage(url: URL(string: travel!.imageUrl)) { phase in
                 if let image = phase.image {
                     image
@@ -30,7 +30,7 @@ struct ReadyTravelView: View {
             }
             VStack {
                 Text(travel!.name).font(.system(size: 24, weight: .medium))
-                Text("\(travel!.price) zł").font(.system(size: 20, weight: .thin))
+                Text("\(String(travel!.price)) zł").font(.system(size: 20, weight: .thin))
                 Divider()
             }.frame(width: .infinity)
             
@@ -42,8 +42,7 @@ struct ReadyTravelView: View {
                 }.frame(height: 150)
                 Divider()
             }
-
-            Text(travel!.description)
+            Text(verbatim: travel!.description.replacingOccurrences(of: "\\n", with: "\n")).multilineTextAlignment(.leading).lineLimit(nil)
             Spacer()
         }
 
@@ -105,5 +104,5 @@ struct Atractions: View {
 //}
 
 #Preview {
-    ReadyTravelView(travel: ReadyTravelModel(travelId: 0, imageUrl: "", name: "", description: "", price: 0, from: "", destination: "", members: 0, likes: 0))
+    ReadyTravelView(travel: ReadyTravelModel(travelId: 0, imageUrl: "", days: 0, name: "", description: "", price: 0, from: "", destination: "", members: 0, likes: 0))
 }

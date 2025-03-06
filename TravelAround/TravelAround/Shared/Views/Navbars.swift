@@ -110,7 +110,7 @@ struct TravelNavbar: View {
 
 #Preview {
     @Previewable @State var fullscreenV: Bool = true;
-    @Previewable @State var selectedTravel: ReadyTravelModel? = ReadyTravelModel(travelId: 1, imageUrl: "", name: "", description: "", price: 0, from: "", destination: "", members: 0, likes: 0)
+    @Previewable @State var selectedTravel: ReadyTravelModel? = ReadyTravelModel(travelId: 1, imageUrl: "", days: 0, name: "", description: "", price: 0, from: "", destination: "", members: 0, likes: 0)
     SimpleNavbar(fullscreen: $fullscreenV)
     TravelNavbar(selectedTravel: $selectedTravel)
 }

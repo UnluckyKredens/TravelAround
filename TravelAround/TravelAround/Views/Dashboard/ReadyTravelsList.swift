@@ -17,6 +17,11 @@ struct ReadyTravelsList: View {
                     Image(systemName: "x.circle").foregroundStyle(.red).font(.system(size: 32)).padding(2)
                     Text("Coś poszło nie tak").font(.system(size: 18, weight: .light))
                 }.frame(height: 180)
+            }else if isLoading == -2 {
+                VStack {
+                    Image(systemName: "x.circle").foregroundStyle(.red).font(.system(size: 32)).padding(2)
+                    Text("Lista jest pusta").font(.system(size: 18, weight: .light))
+                }
             }
             else {
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -29,7 +34,7 @@ struct ReadyTravelsList: View {
             }
         }.task {
             await DownloadTopTravels()
-        }
+        }.padding()
 
     }
     
@@ -38,8 +43,12 @@ struct ReadyTravelsList: View {
     func DownloadTopTravels() async {
         do {
             let travels = try await travelService.DownloadTopTravels()
-           self.ReadyTravels = travels
-            self.isLoading = 0
+            if(travels.isEmpty) {
+                self.isLoading = -2
+            }else {
+                self.ReadyTravels = travels
+                 self.isLoading = 0
+            }
         } catch {
             self.isLoading = -1
         }
